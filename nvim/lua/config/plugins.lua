@@ -38,5 +38,11 @@ return require('packer').startup(function(use)
     }
   }
   use {'christoomey/vim-tmux-navigator', lazy=false}
+  use {
+      "williamboman/mason.nvim",
+      "mfussenegger/nvim-dap",
+      "jay-babu/mason-nvim-dap.nvim",
+  }
+  use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
 end)
 
