@@ -44,6 +44,5 @@ return require('packer').startup(function(use)
       "jay-babu/mason-nvim-dap.nvim",
   }
   use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
-  use { "github/copilot.vim" }
 end)
 
