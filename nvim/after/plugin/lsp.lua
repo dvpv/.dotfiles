@@ -3,6 +3,7 @@ lsp_zero.on_attach(function(client, bufnr)
   -- see :help lsp-zero-keybindings
   -- to learn the available actions
   lsp_zero.default_keymaps({buffer = bufnr})
+  lsp_zero.buffer_autoformat()
 
   local opts = {buffer = bufnr, remap = false}
 
@@ -17,7 +18,26 @@ lsp_zero.on_attach(function(client, bufnr)
   vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, opts)
   vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
   vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+  vim.keymap.set({"n", "x"}, "gq", function() vim.lsp.buf.format({
+          async = false,
+          timeout_ms = 10000,
+       --   filter = allow_format({'clang-format'}) -- Allow only selected servers
+      })
+  end, opts)
 end)
+
+-- Format on save
+-- lsp_zero.format_on_save({
+--     format_opts = {
+--         async = false,
+--         timeout_ms = 10000,
+--     },
+--     servers = {
+--         ['clang-format'] = {'cpp'},
+--         ['flake8'] = {'py'},
+-- --        ['black'] = {'py'},
+--     }
+-- })
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
@@ -40,7 +60,8 @@ cmp.setup({
     ['<C-Space>'] = cmp.mapping.complete(),
     ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
     ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-    ['<C-y>'] = cmp.mapping.confirm({select = true}),
+    -- ['<C-y>'] = cmp.mapping.confirm({select = true}),
+    ['<Tab>'] = cmp.mapping.confirm({select = true}),
     -- ['<CR>'] = cmp.mapping.confirm({select = false}),
 
     -- Navigate between snippet placeholder

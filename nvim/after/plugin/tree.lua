@@ -6,6 +6,16 @@ local tree = require("neo-tree").setup({
             folder_empty = "",
         }
     },
+    filesystem = {
+        filtered_items = {
+            hide_hidden = false,
+            hide_dotfiles = false,
+            hide_gitignored = true,
+        },
+        hide_by_pattern = {
+            "**/__pycache__/**",
+        }
+    }
 })
 
 
