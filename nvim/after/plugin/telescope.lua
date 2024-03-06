@@ -1,5 +1,13 @@
 local telescope = require('telescope')
 telescope.setup({
+    defaults = {
+        file_ignore_patterns = {
+            "build",
+            "thirdparty",
+            ".git",
+            ".cache",
+        },
+    },
     pickers = {
         find_files = {
             hidden = true,

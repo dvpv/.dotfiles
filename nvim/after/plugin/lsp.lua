@@ -89,9 +89,26 @@ end
 
 vim.keymap.set("n", "<leader>db", vim.cmd.DapToggleBreakpoint)
 vim.keymap.set("n", "<leader>dr", vim.cmd.DapContinue)
+vim.keymap.set("n", "<leader>dso", vim.cmd.DapStepOver)
+vim.keymap.set("n", "<leader>dsr", vim.cmd.DapStepOut)
+vim.keymap.set("n", "<leader>dsi", vim.cmd.DapStepInto)
 
 require("mason-nvim-dap").setup({
-    ensure_installed = {},
+    ensure_installed = {"codelldb"},
     handlers = {},
 })
+
+require('dap.ext.vscode').load_launchjs(nil, { cppdbg = {'c', 'cpp'} })
+
+dap.adapters.gdb = {
+    type = 'executable',
+    command = 'gdb',
+    args = { '-i', 'dap' }
+}
+
+dap.adapters.cppdbg = {
+    type = 'executable',
+    command = 'gdb',
+    args = { '-i', 'dap' }
+}
 
