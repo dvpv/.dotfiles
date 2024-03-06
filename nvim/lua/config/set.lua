@@ -28,4 +28,4 @@ vim.opt.signcolumn = "yes"
 vim.opt.colorcolumn = "80,120"
 
 vim.g.mapleader = " "
-
+vim.opt.termguicolors = true

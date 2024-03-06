@@ -45,5 +45,6 @@ return require('packer').startup(function(use)
   }
   use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
   use { "github/copilot.vim" }
+  use { "brenoprata10/nvim-highlight-colors" }
 end)
 
