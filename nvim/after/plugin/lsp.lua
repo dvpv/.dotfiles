@@ -27,17 +27,17 @@ lsp_zero.on_attach(function(client, bufnr)
 end)
 
 -- Format on save
--- lsp_zero.format_on_save({
---     format_opts = {
---         async = false,
---         timeout_ms = 10000,
---     },
---     servers = {
---         ['clang-format'] = {'cpp'},
---         ['flake8'] = {'py'},
--- --        ['black'] = {'py'},
---     }
--- })
+--lsp_zero.format_on_save({
+--    format_opts = {
+--        async = false,
+--        timeout_ms = 10000,
+--    },
+--    --     servers = {
+--        --         ['clang-format'] = {'cpp'},
+--        --         ['flake8'] = {'py'},
+--        -- --        ['black'] = {'py'},
+--        --     }
+--    })
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
