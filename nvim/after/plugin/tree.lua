@@ -1,6 +1,14 @@
-local tree = require("neo-tree").setup({
+require("neo-tree").setup({
+    event_handlers = {
+        {
+            event = "file_opened",
+            handler = function(file_path)
+                require("neo-tree.command").execute({ action = "close" })
+            end
+        },
+    },
     close_if_last_window = true,
-    popup_border_style = "rounded",
+    popup_border_style = "NC",
     default_component_configs = {
         icon = {
             folder_closed = "",
@@ -17,9 +25,10 @@ local tree = require("neo-tree").setup({
         hide_by_pattern = {
             "**/__pycache__/**",
         }
+    },
+    window = {
+        position = "right"
     }
 })
 
-
-
-vim.keymap.set("n", "<C-B>", "<cmd>Neotree source=filesystem reveal=true position=left toggle=true<CR>")
+vim.keymap.set("n", "<C-B>", "<cmd>Neotree source=filesystem reveal=true position=right toggle=true<CR>")
