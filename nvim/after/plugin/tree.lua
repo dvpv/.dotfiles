@@ -23,5 +23,3 @@ local tree = require("neo-tree").setup({
 
 
 vim.keymap.set("n", "<C-B>", "<cmd>Neotree source=filesystem reveal=true position=left toggle=true<CR>")
-
-
