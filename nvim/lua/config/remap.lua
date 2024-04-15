@@ -38,3 +38,6 @@ vim.keymap.set("n", "<leader>vpp", "<cmd>e ~/.config/nvim/lua/config/plugins.lua
 vim.keymap.set("n", "<leader><leader>", function()
     vim.cmd("so")
 end)
+
+vim.keymap.set("n", "<leader>W", "<cmd>noa w<CR>")
+vim.keymap.set("n", "<leader>w", "<cmd>w<CR>")
