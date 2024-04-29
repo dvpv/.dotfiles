@@ -44,4 +44,5 @@ return require('packer').startup(function(use)
 	use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } }
 	use { "github/copilot.vim" }
 	use { "brenoprata10/nvim-highlight-colors" }
+    use { "catppuccin/nvim", as = "catppuccin" }
 end)
