@@ -99,7 +99,7 @@ require("mason-nvim-dap").setup({
     handlers = {},
 })
 
-require('dap.ext.vscode').load_launchjs(nil, { cppdbg = { 'c', 'cpp' } })
+require('dap.ext.vscode').load_launchjs(nil, { cppdbg = { 'c', 'cpp', 'go' }, gdb = { 'go' } })
 
 dap.adapters.gdb = {
     type = 'executable',
