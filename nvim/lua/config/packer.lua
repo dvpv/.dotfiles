@@ -60,4 +60,8 @@ return require('packer').startup(function(use)
             "nvim-neotest/neotest",
         }
     }
+    use { "morhetz/gruvbox" }
+    use { "EdenEast/nightfox.nvim" }
+    use { "folke/tokyonight.nvim" }
+    use { "Shatur/neovim-ayu" }
 end)
