@@ -7,3 +7,6 @@ do
     cd ..
 done
 
+# Install PS1
+cat ps1.sh >> ~/.bashrc
+
