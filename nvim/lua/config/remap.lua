@@ -41,3 +41,6 @@ end)
 
 vim.keymap.set("n", "<leader>W", "<cmd>noa w<CR>")
 vim.keymap.set("n", "<leader>w", "<cmd>w<CR>")
+vim.keymap.set("n", "<leader>tt", "<cmd>terminal<CR>")
+vim.keymap.set("n", "<leader>tv", "<cmd>vsplit | terminal<CR>")
+vim.keymap.set("n", "<leader>th", "<cmd>split | terminal<CR>")

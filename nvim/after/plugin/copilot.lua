@@ -4,3 +4,4 @@ vim.keymap.set('i', '<C-y>', 'copilot#Accept("\\<CR>")', {
 })
 
 vim.g.copilot_no_tab_map = true
+vim.cmd("Copilot disable")
