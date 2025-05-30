@@ -25,7 +25,7 @@ vim.opt.scrolloff = 8
 vim.opt.signcolumn = "yes"
 --vim.opt.isfname:append("@-@")
 
-vim.opt.colorcolumn = "80,120"
+vim.opt.colorcolumn = "80,100,120"
 
 vim.g.mapleader = " "
 vim.opt.termguicolors = true
