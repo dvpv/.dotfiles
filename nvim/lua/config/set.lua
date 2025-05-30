@@ -29,3 +29,7 @@ vim.opt.colorcolumn = "80,100,120"
 
 vim.g.mapleader = " "
 vim.opt.termguicolors = true
+vim.cmd.colorscheme("ayu")
+vim.cmd.set("cursorline")
+vim.cmd.set("cursorcolumn")
+vim.opt.background = "dark"
