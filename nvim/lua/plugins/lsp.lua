@@ -22,8 +22,8 @@ return {
                     vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
                     vim.keymap.set({ "n", "x" }, "gq", function()
                         vim.lsp.buf.format({
-                            async  =  false,
-                            timeout_ms  =  10000,
+                            async = false,
+                            timeout_ms = 10000,
                         })
                     end
                     )
@@ -55,9 +55,26 @@ return {
             require("mason-lspconfig").setup({
                 handlers = {
                     function(server_name)
-                        require("lspconfig")[server_name].setup({
-                            capabilities  =  lsp_capabilities,
-                        })
+                        local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
+                        local lspconfig = require("lspconfig")
+                        if server_name == "kotlin_language_server" then
+                            lspconfig[server_name].setup({
+                                capabilities = lsp_capabilities,
+                                settings = {
+                                    kotlin = {
+                                        compiler = {
+                                            jvm = {
+                                                target = "1.7"
+                                            }
+                                        }
+                                    }
+                                }
+                            })
+                        else
+                            lspconfig[server_name].setup({
+                                capabilities = lsp_capabilities,
+                            })
+                        end
                     end,
                 }
             })
@@ -88,12 +105,7 @@ return {
             })
         end
     },
-    {
-        "hrsh7th/cmp-nvim-lsp",
-        config = function()
-            local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
-        end
-    },
+    { "hrsh7th/cmp-nvim-lsp" },
     { "L3MON4D3/LuaSnip" },
     { "mfussenegger/nvim-dap", "jay-babu/mason-nvim-dap.nvim" },
     {
