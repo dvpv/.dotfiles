@@ -45,37 +45,45 @@ return {
                     end
                 end
             })
-        end
+        end,
     },
     {
         "mason-org/mason-lspconfig.nvim",
         dependencies = { "mason-org/mason.nvim" },
         config = function()
-            require("mason").setup({})
-            require("mason-lspconfig").setup({
-                handlers = {
-                    function(server_name)
-                        local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
-                        local lspconfig = require("lspconfig")
-                        if server_name == "kotlin_language_server" then
-                            lspconfig[server_name].setup({
-                                capabilities = lsp_capabilities,
-                                settings = {
-                                    kotlin = {
-                                        compiler = {
-                                            jvm = {
-                                                target = "1.7"
-                                            }
-                                        }
-                                    }
-                                }
-                            })
-                        else
-                            lspconfig[server_name].setup({
-                                capabilities = lsp_capabilities,
-                            })
-                        end
-                    end,
+            require("mason").setup()
+            require("mason-lspconfig").setup({})
+            local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
+            -- Default config for all servers
+            vim.lsp.config("*", {
+                capabilities = lsp_capabilities,
+            })
+
+            -- Server-specific overrides
+            -- vim.lsp.config("clangd", {
+            --     filetypes = { "cpp", "c", "objc", "objcpp", "cuda", "proto", "h", "hpp", "hxx", "cc", "ino" },
+            -- })
+            vim.lsp.config("arduino_language_server", {
+                capabilities = lsp_capabilities,
+                cmd = {
+                    "arduino-language-server",
+                    "-cli", "arduino-cli",
+                    "-cli-config", vim.fn.expand("~/Library/Arduino15/arduino-cli.yaml"),
+                    "-fqbn", "arduino:avr:uno",
+                    "-clangd", "clangd",
+                },
+                filetypes = { "arduino", "ino" },
+            })
+            vim.lsp.config("kotlin_language_server", {
+                capabilities = lsp_capabilities,
+                settings = {
+                    kotlin = {
+                        compiler = {
+                            jvm = {
+                                target = "1.7"
+                            }
+                        }
+                    }
                 }
             })
         end
