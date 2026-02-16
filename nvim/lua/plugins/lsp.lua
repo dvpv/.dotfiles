@@ -9,32 +9,55 @@ return {
                 group = vim.api.nvim_create_augroup("user_lsp_attach", { clear = true }),
                 callback = function(args)
                     local opts = { buffer = args.buf }
-                    vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
-                    vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
-                    vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
-                    vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
-                    vim.keymap.set("n", "<leader>vD", function() vim.diagnostic.setloclist() end, opts)
-                    vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
-                    vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
-                    vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
-                    vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, opts)
-                    vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
-                    vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+                    vim.keymap.set("n", "gd", function()
+                        vim.lsp.buf.definition()
+                    end, opts)
+                    vim.keymap.set("n", "K", function()
+                        vim.lsp.buf.hover()
+                    end, opts)
+                    vim.keymap.set("n", "<leader>vws", function()
+                        vim.lsp.buf.workspace_symbol()
+                    end, opts)
+                    vim.keymap.set("n", "<leader>vd", function()
+                        vim.diagnostic.open_float()
+                    end, opts)
+                    vim.keymap.set("n", "<leader>vD", function()
+                        vim.diagnostic.setloclist()
+                    end, opts)
+                    vim.keymap.set("n", "[d", function()
+                        vim.diagnostic.goto_next()
+                    end, opts)
+                    vim.keymap.set("n", "]d", function()
+                        vim.diagnostic.goto_prev()
+                    end, opts)
+                    vim.keymap.set("n", "<leader>vca", function()
+                        vim.lsp.buf.code_action()
+                    end, opts)
+                    vim.keymap.set("n", "<leader>vrr", function()
+                        vim.lsp.buf.references()
+                    end, opts)
+                    vim.keymap.set("n", "<leader>vrn", function()
+                        vim.lsp.buf.rename()
+                    end, opts)
+                    vim.keymap.set("i", "<C-h>", function()
+                        vim.lsp.buf.signature_help()
+                    end, opts)
                     vim.keymap.set({ "n", "x" }, "gq", function()
                         vim.lsp.buf.format({
                             async = false,
                             timeout_ms = 10000,
                         })
-                    end
-                    )
+                    end)
                     local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
                     if client:supports_method("textDocument/implementation") then
                     end
                     if client:supports_method("textDocument/completion") then
                         vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = false })
                     end
-                    if not client:supports_method("textDocument/willSaveWaitUntil")
-                        and client:supports_method("textDocument/formatting") then
+                    if
+                        not client:supports_method("textDocument/willSaveWaitUntil")
+                        and client:supports_method("textDocument/formatting")
+                    then
                         vim.api.nvim_create_autocmd("BufWritePre", {
                             group = vim.api.nvim_create_augroup("my.lsp", { clear = false }),
                             buffer = args.buf,
@@ -43,7 +66,7 @@ return {
                             end,
                         })
                     end
-                end
+                end,
             })
         end,
     },
@@ -67,10 +90,14 @@ return {
                 capabilities = lsp_capabilities,
                 cmd = {
                     "arduino-language-server",
-                    "-cli", "arduino-cli",
-                    "-cli-config", vim.fn.expand("~/Library/Arduino15/arduino-cli.yaml"),
-                    "-fqbn", "arduino:avr:uno",
-                    "-clangd", "clangd",
+                    "-cli",
+                    "arduino-cli",
+                    "-cli-config",
+                    vim.fn.expand("~/Library/Arduino15/arduino-cli.yaml"),
+                    "-fqbn",
+                    "arduino:avr:uno",
+                    "-clangd",
+                    "clangd",
                 },
                 filetypes = { "arduino", "ino" },
             })
@@ -80,13 +107,13 @@ return {
                     kotlin = {
                         compiler = {
                             jvm = {
-                                target = "1.7"
-                            }
-                        }
-                    }
-                }
+                                target = "1.7",
+                            },
+                        },
+                    },
+                },
             })
-        end
+        end,
     },
     {
         "hrsh7th/nvim-cmp",
@@ -111,7 +138,7 @@ return {
                     end,
                 },
             })
-        end
+        end,
     },
     { "hrsh7th/cmp-nvim-lsp" },
     { "L3MON4D3/LuaSnip" },
@@ -141,17 +168,16 @@ return {
                 ensure_installed = { "codelldb" },
                 handlers = {},
             })
-            require("dap.ext.vscode").load_launchjs(nil, { cppdbg = { "c", "cpp" } })
             dap.adapters.gdb = {
                 type = "executable",
                 command = "gdb",
-                args = { "-i", "dap" }
+                args = { "-i", "dap" },
             }
             dap.adapters.cppdbg = {
                 type = "executable",
                 command = "gdb",
-                args = { "-i", "dap" }
+                args = { "-i", "dap" },
             }
-        end
+        end,
     },
 }
